@@ -1,4 +1,4 @@
-function Set-ILWSUSSSLState {
+function Set-ILWSUSSLState {
     param(
     [Parameter(Mandatory = $true)]
     [ValidateSet('Enabled', 'Disabled')]
