@@ -98,10 +98,10 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/CodyMathis123/I-LOVE-WSUS/blob/Production/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/CodyMathis123/I-LOVE-WSUS/tree/Production/SSL/ILoveWSUSSL'
 
         # A URL to an icon representing this module.
         # IconUri = ''

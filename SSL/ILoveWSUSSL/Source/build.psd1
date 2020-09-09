@@ -1,1 +1,6 @@
-@{ Path = "ILoveWSUSSL.psd1" }
+@{ 
+    Path            = "ILoveWSUSSL.psd1" 
+    CopyDirectories = @(
+        'en-US'
+    )
+}
