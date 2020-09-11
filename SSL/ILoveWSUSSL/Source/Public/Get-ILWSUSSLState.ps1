@@ -1,4 +1,8 @@
 function Get-ILWSUSSLState {
+    param(
+        [Parameter(Mandatory = $false)]
+        [WSUSComponent[]]$WSUSComponent
+    )
     $WSUSSLState = [Ordered]@{}
     $getWebConfigurationPropertySplat = @{
         Filter      = '/system.webServer/security/Access'
@@ -6,7 +10,14 @@ function Get-ILWSUSSLState {
         PSPath      = 'MACHINE/WEBROOT/APPHOST'
         ErrorAction = 'Stop'
     }
-    $WSUSComponent = [System.Enum]::GetValues('WSUSComponent')
+    [string[]]$WSUSComponent = switch ($PSBoundParameters.ContainsKey('WSUSComponent')) {
+        $true {
+            $WSUSComponent
+        }
+        $false {
+            [System.Enum]::GetValues('WSUSComponent')
+        }
+    }
     foreach ($Component in $WSUSComponent) {
         $SitePath = [string]::Format('WSUS Administration/{0}', $Component)
         $getWebConfigurationPropertySplat['Location'] = $SitePath
@@ -14,23 +25,24 @@ function Get-ILWSUSSLState {
             $sslFlags = Get-WebConfigurationProperty @getWebConfigurationPropertySplat
             switch ($sslFlags.GetType().Name) {
                 String {
-                    $WSUSSLState[$Component] = $sslFlags
+                    $WSUSSLState.Add($Component, $sslFlags)
                 }
                 ConfigurationAttribute {
-                    $WSUSSLState[$Component] = switch ($sslFlags.Value) {
-                        0 {
-                            'Disabled'
-                        }
-                        default {
-                            'Unknown'
-                        }
-                    }
+                    $WSUSSLState.Add($Component, $(switch ($sslFlags.Value) {
+                                0 {
+                                    'Disabled'
+                                }
+                                default {
+                                    'Unknown'
+                                }
+                            }))
                 }
             }
         }
         catch {
-            $WSUSSLState[$Component] = 'Disabled'
+            $WSUSSLState.Add($Component, 'Disabled')
         }
     }
-    $WSUSSLState
+    
+    Write-Output $WSUSSLState
 }
