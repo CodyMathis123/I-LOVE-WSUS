@@ -2,6 +2,7 @@ function Import-ILWSUSSLConfigurationItem {
     [Alias('Import-ILWSUSSLCI')]
     param()
     # TODO - Need to code the 'enable SSL' stuff including a detection script
+    # TODO - Create a CI that runs on your Site Server, queries the compliance of the other CI, and if compliant flips the SUP to HTTPS
 
     $EnumObject = [WSUSComponent]
     $EnumAsString = Convert-EnumToString -EnumToConvert $EnumObject
