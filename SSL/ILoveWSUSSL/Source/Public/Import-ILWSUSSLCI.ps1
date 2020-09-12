@@ -1,23 +1,52 @@
 function Import-ILWSUSSLConfigurationItem {
     [Alias('Import-ILWSUSSLCI')]
     param()
-    # TODO - Create the appropriate scriptblocks
-    # TODO - Create all the CIs
-    # TODO - Need the code for the requirements
-    # TODO - Need to code the 'enable SSL' stuff
+    # TODO - Need to code the 'enable SSL' stuff including a detection script
 
     $EnumObject = [WSUSComponent]
     $EnumAsString = Convert-EnumToString -EnumToConvert $EnumObject
-    
-    $ScriptBlock1 = Convert-FunctionToString -FunctionToConvert Set-ILWApiRemoting30SSL
-    $ScriptBlock2 = Convert-FunctionToString -FunctionToConvert Get-ILWSUSSLState
+    [string[]]$EnumValues = [System.Enum]::GetValues($EnumObject.Name)
+    $scriptblockGetILWSUSSLState = Convert-FunctionToString -FunctionToConvert Get-ILWSUSSLState
 
-    $FullScriptBlockDetection = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $ScriptBlock2, '(Get-ILWSUSSLState -WSUSComponent ApiRemoting30).ApiRemoting30'))
+    foreach ($Component in $EnumValues) {
+        $FunctionName = [string]::Format('Set-ILW{0}SSL', $Component)
+        $scriptblockSetSSL = Convert-FunctionToString -FunctionToConvert $FunctionName
 
-    $FullScriptBlockRemediate = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $ScriptBlock1, 'Set-ILWApiRemoting30SSL -SSLState Enabled'))
+        $FullScriptBlockDetection = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockGetILWSUSSLState, [string]::Format('(Get-ILWSUSSLState -WSUSComponent {0}).{0}', $Component)))
 
-    $ApiRemoting30CI = New-CMConfigurationItem -Name 'WSUS - ApiRemoting30 Enable SSL' -Description 'PowerShell scripts that ensure the ApiRemoting30 component of WSUS is properly configured for SSL' -CreationType WindowsApplication
+        $FullScriptBlockRemediate = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockSetSSL, [string]::Format('{0} -SSLState Enabled', $FunctionName)))
 
-    Add-CMComplianceSettingScript -DataType String -Remediate -DiscoveryScriptLanguage PowerShell -DiscoveryScriptText $FullScriptBlockDetection -RemediationScriptLanguage PowerShell -RemediationScriptText $FullScriptBlockRemediate -ExpectedValue 'SSL' -ExpressionOperator IsEquals -Name 'ApiRemoting30 SSL' -InputObject $ApiRemoting30CI -NoncomplianceSeverity Warning -ReportNoncompliance -RuleName 'Must Return SSL' -ValueRule:$false
-    
+        $newCMConfigurationItemSplat = @{
+            Name         = [string]::Format('WSUS - {0} Enable SSL', $Component)
+            Description  = [string]::Format('PowerShell scripts that ensure the {0} component of WSUS is properly configured for SSL', $Component)
+            CreationType = 'WindowsApplication'
+        }
+
+        $ComponentSSLCI = New-CMConfigurationItem @newCMConfigurationItemSplat
+
+        $addCMComplianceSettingScriptSplat = @{
+            DataType                  = 'String'
+            Remediate                 = $true
+            DiscoveryScriptLanguage   = 'PowerShell'
+            DiscoveryScriptText       = $FullScriptBlockDetection
+            RemediationScriptLanguage = 'PowerShell'
+            RemediationScriptText     = $FullScriptBlockRemediate
+            ExpectedValue             = 'SSL'
+            ExpressionOperator        = 'IsEquals'
+            Name                      = [string]::Format('{0} SSL', $Component)
+            InputObject               = $ComponentSSLCI
+            NoncomplianceSeverity     = 'Warning'
+            ReportNoncompliance       = $true
+            RuleName                  = 'Must Return SSL'
+            ValueRule                 = $false
+            Is64Bit                   = $true
+        }
+
+        Add-CMComplianceSettingScript @addCMComplianceSettingScriptSplat
+    }
+
+    [xml]$Def = (Get-CMConfigurationItem)[1] | Select-Object -ExpandProperty sdmpackagexml
+    $xmldef.DesiredConfigurationDigest.Application.ScriptDiscoveryInfo.ScriptType = 'PowerShell'
+    $xmldef.DesiredConfigurationDigest.Application.ScriptDiscoveryInfo.Script = 'Bacon Is Really Delicious'
+    Set-CMConfigurationItem -InputObject (Get-CMConfigurationItem)[1] -DigestXml $xmldef.OuterXml
 }
