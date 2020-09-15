@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-ILWClientWebServiceSSL
+# Set-ILWWebConfigurationSSL
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Set-ILWClientWebServiceSSL [-SSLState] <String> [<CommonParameters>]
+Set-ILWWebConfigurationSSL [[-WSUSComponent] <WSUSComponent[]>] [-SSLState] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,6 +40,22 @@ Aliases:
 Accepted values: Enabled, Disabled
 
 Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WSUSComponent
+{{ Fill WSUSComponent Description }}
+
+```yaml
+Type: WSUSComponent[]
+Parameter Sets: (All)
+Aliases:
+Accepted values: ApiRemoting30, ClientWebService, Content, DssAuthWebService, Inventory, ReportingWebService, SelfUpdate, ServerSyncWebService, SimpleAuthWebService
+
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
