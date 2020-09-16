@@ -1,1 +1,0 @@
-# Simplify WSUS SSL Configuration
