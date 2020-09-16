@@ -1,4 +1,5 @@
 function Set-ILWWebConfigurationSSL {
+    [CmdletBinding()]
     param(
         [Parameter(Mandatory = $false)]
         [WSUSComponent[]]$WSUSComponent = [System.Enum]::GetValues('WSUSComponent'),
@@ -20,6 +21,7 @@ function Set-ILWWebConfigurationSSL {
             $SitePath = [string]::Format('WSUS Administration/{0}', $Component)
             $setWebConfigurationPropertySplat['Location'] = $SitePath
             Set-WebConfigurationProperty @setWebConfigurationPropertySplat
+            Write-Verbose "Successfully configured $Component to have an SSL state of $SSLState"
         }
     }
 }

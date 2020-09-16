@@ -8,30 +8,44 @@ schema: 2.0.0
 # Set-ILWSUSSLState
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Configures all WSUSComponent to the desired SSLState
 
 ## SYNTAX
 
-```
+```ps
 Set-ILWSUSSLState [-SSLState] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+This function is used to properly configure the IIS WSUSComponents to the desired SSLState, either Enabled or Disabled.
+
+It will automatically account for WSUSComponents such as Content for example, which should never be SSL.
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+
+```ps
+PS C:\> Set-ILWSUSSLState -SSLState Enabled
 ```
 
-{{ Add example description here }}
+Configures all WSUSComponent in IIS to be compatible with an SSL WSUS server.
+
+### Example 2
+
+```ps
+PS C:\> Set-ILWSUSSLState -SSLState Disabled
+```
+
+Configures all WSUSComponent in IIS to be compatible with a non-SSL WSUS server.
 
 ## PARAMETERS
 
 ### -SSLState
-{{ Fill SSLState Description }}
+
+The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.
 
 ```yaml
 Type: String
@@ -47,6 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -55,7 +70,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
+
 ## NOTES
 
 ## RELATED LINKS

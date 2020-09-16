@@ -8,30 +8,46 @@ schema: 2.0.0
 # Set-ILWWebConfigurationSSL
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Configures the specified WSUSComponent to the desired SSLState
 
 ## SYNTAX
 
-```
+```ps
 Set-ILWWebConfigurationSSL [[-WSUSComponent] <WSUSComponent[]>] [-SSLState] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+This function is used to properly configure the specified IIS WSUSComponents to the desired SSLState, either Enabled or Disabled.
+
+It will automatically account for WSUSComponents such as Content for example, which should never be SSL.
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+
+```ps
+PS C:\> Set-ILWWebConfigurationSSL -WSUSComponent ApiRemoting30 -SSLState Disabled
 ```
 
-{{ Add example description here }}
+Configures the ApiRemoting30 WSUSComponent in IIS to be compatible with a non-SSL WSUS server.
+
+### Example 2
+
+```ps
+PS C:\> Set-ILWWebConfigurationSSL -WSUSComponent ApiRemoting30,Content -SSLState Enabled
+```
+
+Configures the ApiRemoting30 and Content WSUSComponent in IIS to be compatible with an SSL WSUS server. 
+Because the Content virtual directory should always use HTTP the function will not allow it to be configured to SSL,
+but will ensure it is configured properly for HTTP instead.
 
 ## PARAMETERS
 
 ### -SSLState
-{{ Fill SSLState Description }}
+
+The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.
 
 ```yaml
 Type: String
@@ -47,7 +63,8 @@ Accept wildcard characters: False
 ```
 
 ### -WSUSComponent
-{{ Fill WSUSComponent Description }}
+
+Enum that encompasses all IIS based WSUS Components. Can specify one, or multiple. Defaults to all components.
 
 ```yaml
 Type: WSUSComponent[]
@@ -63,6 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -71,7 +89,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
+
 ## NOTES
 
 ## RELATED LINKS

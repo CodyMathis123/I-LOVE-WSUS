@@ -1,12 +1,27 @@
 function Import-ILWSUSSLConfigurationBaseline {
-    [Alias('Import-ILWSUSSLCB')]
     param(
         [Parameter(Mandatory = $false)]
         [ValidateSet('Enabled', 'Disabled')]
         [string]$SSLState = 'Enabled'
     )
-    # TODO - Need to code the 'enable SSL' stuff including a detection script
-    # TODO - Create a CI that runs on your Site Server, queries the compliance of the other CI, and if compliant flips the SUP to HTTPS
+    $CMSiteDrive = Get-PSDrive -PSProvider CMSite -ErrorAction SilentlyContinue
+    $SiteCode = switch ($CMSiteDrive.Count) {
+        1 {
+            $CMSiteDrive.SiteCode
+        }
+        0 {
+            Write-Warning "Please import the Configuration Manager module before using this function"
+            return
+        }
+        default {
+            ($CMSiteDrive | Select-Object -Property SiteCode, SiteServer, Description, IsConnected | Out-GridView -Title 'Please select a site to connect to.' -OutputMode Single).SiteCode
+        }
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($SiteCode)) {
+        $SiteCodePath = [string]::Format('{0}:\', $SiteCode)
+        Set-Location -Path $SiteCodePath
+    }
 
     $EnumObject = [WSUSComponent]
     $EnumAsString = Convert-EnumToString -EnumToConvert $EnumObject
@@ -24,7 +39,7 @@ function Import-ILWSUSSLConfigurationBaseline {
         $FullScriptBlockRemediate = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockSetILWWebConfigurationSSL, $scriptblockResolveILWDesiredSSLState, [string]::Format('Set-ILWWebConfigurationSSL -WSUSComponent {0} -SSLState {1}', $Component, $SSLState)))
 
         $newCMConfigurationItemSplat = @{
-            Name         = [string]::Format('WSUS - {0} SSL {1}', $Component, $ExpectedValue)
+            Name         = [string]::Format('WSUS - {0} SSL seto to {1}', $Component, $ExpectedValue)
             Description  = [string]::Format('PowerShell scripts that ensure the {0} component of WSUS is properly configured for SSL', $Component)
             CreationType = 'WindowsApplication'
         }

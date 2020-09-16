@@ -6,11 +6,11 @@
       <command:verb>Get</command:verb>
       <command:noun>ILWSUSSLState</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Returns the SSL configuration for the specified WSUSComponent</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function will parse the web config for the specified WSUSComponent and return the currently configured SSL state.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -18,7 +18,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>WSUSComponent</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill WSUSComponent Description }}</maml:para>
+            <maml:para>Enum that encompasses all IIS based WSUS Components. Can specify one, or multiple. Defaults to all components.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">ApiRemoting30</command:parameterValue>
@@ -44,7 +44,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>WSUSComponent</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill WSUSComponent Description }}</maml:para>
+          <maml:para>Enum that encompasses all IIS based WSUS Components. Can specify one, or multiple. Defaults to all components.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">WSUSComponent[]</command:parameterValue>
         <dev:type>
@@ -67,7 +67,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>[Ordered]@{}</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -82,9 +82,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-ILWSUSSLState</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Returns the SSL state for all WSUSComponent</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-ILWSUSSLState -WSUSComponent ApiRemoting30</dev:code>
+        <dev:remarks>
+          <maml:para>Returns the SSL state for the ApiRemoting30 WSUSComponent</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -92,23 +99,23 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Set-ILWSUSSLState</command:name>
-      <command:verb>Set</command:verb>
-      <command:noun>ILWSUSSLState</command:noun>
+      <command:name>Import-ILWSUSSLConfigurationBaseline</command:name>
+      <command:verb>Import</command:verb>
+      <command:noun>ILWSUSSLConfigurationBaseline</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Import Configuration Baseline into MEMCM to Enable or Disable SSL on a WSUS server for the IIS WSUSComponent</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function is used to create a set of Configuration Items which will be added to a Configuration Baseline in MEMCM. You specify the desired SSL state and the scripts are generated and turned into Configuration Items.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Set-ILWSUSSLState</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>Import-ILWSUSSLConfigurationBaseline</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>SSLState</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill SSLState Description }}</maml:para>
+            <maml:para>The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Enabled</command:parameterValue>
@@ -124,10 +131,10 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>SSLState</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill SSLState Description }}</maml:para>
+          <maml:para>The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -150,7 +157,98 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para>This function assumes you have already imported the Configuration Manager PowerShell Module. It will attempt to locate a CMSite PSDrive, and set the location.</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Import-ILWSUSSLConfigurationBaseline -SSLState Enabled</dev:code>
+        <dev:remarks>
+          <maml:para>Create Configuration Items, and a Configuration Baseline that will ensure a WSUS server has an SSL state of Enabled for the IIS WSUSComponents</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Import-ILWSUSSLConfigurationBaseline -SSLState Disabled</dev:code>
+        <dev:remarks>
+          <maml:para>Create Configuration Items, and a Configuration Baseline that will ensure a WSUS server has an SSL state of Disabled for the IIS WSUSComponents</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-ILWSUSSLState</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>ILWSUSSLState</command:noun>
+      <maml:description>
+        <maml:para>Configures all WSUSComponent to the desired SSLState</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This function is used to properly configure the IIS WSUSComponents to the desired SSLState, either Enabled or Disabled.</maml:para>
+      <maml:para>It will automatically account for WSUSComponents such as Content for example, which should never be SSL.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-ILWSUSSLState</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>SSLState</maml:name>
+          <maml:Description>
+            <maml:para>The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Enabled</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Disabled</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>SSLState</maml:name>
+        <maml:Description>
+          <maml:para>The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -165,9 +263,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Set-ILWSUSSLState -SSLState Enabled</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Configures all WSUSComponent in IIS to be compatible with an SSL WSUS server.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-ILWSUSSLState -SSLState Disabled</dev:code>
+        <dev:remarks>
+          <maml:para>Configures all WSUSComponent in IIS to be compatible with a non-SSL WSUS server.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -179,11 +284,12 @@
       <command:verb>Set</command:verb>
       <command:noun>ILWWebConfigurationSSL</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Configures the specified WSUSComponent to the desired SSLState</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>This function is used to properly configure the specified IIS WSUSComponents to the desired SSLState, either Enabled or Disabled.</maml:para>
+      <maml:para>It will automatically account for WSUSComponents such as Content for example, which should never be SSL.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -191,7 +297,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>WSUSComponent</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill WSUSComponent Description }}</maml:para>
+            <maml:para>Enum that encompasses all IIS based WSUS Components. Can specify one, or multiple. Defaults to all components.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">ApiRemoting30</command:parameterValue>
@@ -214,7 +320,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SSLState</maml:name>
           <maml:Description>
-            <maml:para>{{ Fill SSLState Description }}</maml:para>
+            <maml:para>The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.</maml:para>
           </maml:Description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Enabled</command:parameterValue>
@@ -233,7 +339,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SSLState</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill SSLState Description }}</maml:para>
+          <maml:para>The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -245,7 +351,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>WSUSComponent</maml:name>
         <maml:Description>
-          <maml:para>{{ Fill WSUSComponent Description }}</maml:para>
+          <maml:para>Enum that encompasses all IIS based WSUS Components. Can specify one, or multiple. Defaults to all components.</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">WSUSComponent[]</command:parameterValue>
         <dev:type>
@@ -268,7 +374,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>None</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -283,9 +389,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Set-ILWWebConfigurationSSL -WSUSComponent ApiRemoting30 -SSLState Disabled</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Configures the ApiRemoting30 WSUSComponent in IIS to be compatible with a non-SSL WSUS server.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Set-ILWWebConfigurationSSL -WSUSComponent ApiRemoting30,Content -SSLState Enabled</dev:code>
+        <dev:remarks>
+          <maml:para>Configures the ApiRemoting30 and Content WSUSComponent in IIS to be compatible with an SSL WSUS server.  Because the Content virtual directory should always use HTTP the function will not allow it to be configured to SSL, but will ensure it is configured properly for HTTP instead.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

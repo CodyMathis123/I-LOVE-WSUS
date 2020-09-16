@@ -8,30 +8,42 @@ schema: 2.0.0
 # Get-ILWSUSSLState
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Returns the SSL configuration for the specified WSUSComponent
 
 ## SYNTAX
 
-```
+```ps
 Get-ILWSUSSLState [[-WSUSComponent] <WSUSComponent[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+This function will parse the web config for the specified WSUSComponent and return the currently configured SSL state.
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+
+```ps
+PS C:\> Get-ILWSUSSLState
 ```
 
-{{ Add example description here }}
+Returns the SSL state for all WSUSComponent
+
+### Example 2
+
+```ps
+PS C:\> Get-ILWSUSSLState -WSUSComponent ApiRemoting30
+```
+
+Returns the SSL state for the ApiRemoting30 WSUSComponent
 
 ## PARAMETERS
 
 ### -WSUSComponent
-{{ Fill WSUSComponent Description }}
+
+Enum that encompasses all IIS based WSUS Components. Can specify one, or multiple. Defaults to all components.
 
 ```yaml
 Type: WSUSComponent[]
@@ -47,6 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -55,7 +68,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### [Ordered]@{}
+
 ## NOTES
 
 ## RELATED LINKS
