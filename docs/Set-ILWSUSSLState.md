@@ -13,7 +13,7 @@ Configures all WSUSComponent to the desired SSLState
 
 ## SYNTAX
 
-```ps
+```
 Set-ILWSUSSLState [-SSLState] <String> [<CommonParameters>]
 ```
 

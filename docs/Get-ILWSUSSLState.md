@@ -13,7 +13,7 @@ Returns the SSL configuration for the specified WSUSComponent
 
 ## SYNTAX
 
-```ps
+```
 Get-ILWSUSSLState [[-WSUSComponent] <WSUSComponent[]>] [<CommonParameters>]
 ```
 

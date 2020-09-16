@@ -13,7 +13,7 @@ Import Configuration Baseline into MEMCM to Enable or Disable SSL on a WSUS serv
 
 ## SYNTAX
 
-```ps
+```
 Import-ILWSUSSLConfigurationBaseline [[-SSLState] <String>] [<CommonParameters>]
 ```
 
