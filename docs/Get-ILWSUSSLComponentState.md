@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-ILWSUSSLState
+# Get-ILWSUSSLComponentState
 
 ## SYNOPSIS
 
@@ -14,7 +14,7 @@ Returns the SSL configuration for the specified WSUSComponent
 ## SYNTAX
 
 ```
-Get-ILWSUSSLState [[-WSUSComponent] <WSUSComponent[]>] [<CommonParameters>]
+Get-ILWSUSSLComponentState [[-WSUSComponent] <WSUSComponent[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,7 +26,7 @@ This function will parse the web config for the specified WSUSComponent and retu
 ### Example 1
 
 ```ps
-PS C:\> Get-ILWSUSSLState
+PS C:\> Get-ILWSUSSLComponentState
 ```
 
 Returns the SSL state for all WSUSComponent
@@ -34,7 +34,7 @@ Returns the SSL state for all WSUSComponent
 ### Example 2
 
 ```ps
-PS C:\> Get-ILWSUSSLState -WSUSComponent ApiRemoting30
+PS C:\> Get-ILWSUSSLComponentState -WSUSComponent ApiRemoting30
 ```
 
 Returns the SSL state for the ApiRemoting30 WSUSComponent

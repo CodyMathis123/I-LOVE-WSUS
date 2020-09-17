@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-ILWSUSSLState
+# Set-ILWSUSSLComponentState
 
 ## SYNOPSIS
 
@@ -14,7 +14,7 @@ Configures all WSUSComponent to the desired SSLState
 ## SYNTAX
 
 ```
-Set-ILWSUSSLState [-SSLState] <String> [<CommonParameters>]
+Set-ILWSUSSLComponentState [-SSLState] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -28,7 +28,7 @@ It will automatically account for WSUSComponents such as Content for example, wh
 ### Example 1
 
 ```ps
-PS C:\> Set-ILWSUSSLState -SSLState Enabled
+PS C:\> Set-ILWSUSSLComponentState -SSLState Enabled
 ```
 
 Configures all WSUSComponent in IIS to be compatible with an SSL WSUS server.
@@ -36,7 +36,7 @@ Configures all WSUSComponent in IIS to be compatible with an SSL WSUS server.
 ### Example 2
 
 ```ps
-PS C:\> Set-ILWSUSSLState -SSLState Disabled
+PS C:\> Set-ILWSUSSLComponentState -SSLState Disabled
 ```
 
 Configures all WSUSComponent in IIS to be compatible with a non-SSL WSUS server.

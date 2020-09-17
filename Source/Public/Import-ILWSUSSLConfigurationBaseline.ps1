@@ -26,18 +26,18 @@ function Import-ILWSUSSLConfigurationBaseline {
     $EnumObject = [WSUSComponent]
     $EnumAsString = Convert-EnumToString -EnumToConvert $EnumObject
     [string[]]$EnumValues = [System.Enum]::GetValues($EnumObject.Name)
-    $scriptblockGetILWSUSSLState = Convert-FunctionToString -FunctionToConvert Get-ILWSUSSLState
+    $scriptblockGetILWSUSSLState = Convert-FunctionToString -FunctionToConvert Get-ILWSUSSLComponentState
     $scriptblockResolveILWDesiredSSLState = Convert-FunctionToString -FunctionToConvert Resolve-ILWDesiredSSLState
     $scriptblockSetILWWebConfigurationSSL = Convert-FunctionToString -FunctionToConvert Set-ILWWebConfigurationSSL
     $scriptblockTestILWSUSIsSSL = Convert-FunctionToString -FunctionToConvert Test-ILWSUSIsSSL
     $scriptblockInvokeILWSUSConfigSSL = Convert-FunctionToString -FunctionToConvert Invoke-ILWSUSConfigSSL
-    $scriptblockTestILWSUSSLState  = Convert-FunctionToString -FunctionToConvert Test-ILWSUSSLState
+    $scriptblockTestILWSUSSLState  = Convert-FunctionToString -FunctionToConvert Test-ILWSUSSLComponentState
     $Baseline = New-CMBaseline -Name "WSUS SSL $SSLState" -Description "CB to ensure the WSUS IIS Components are correctly configured to set SSL to $SSLState"
 
     foreach ($Component in $EnumValues) {
         $ExpectedValue = Resolve-ILWDesiredSSLState -WSUSComponent $Component -SSLState $SSLState
         Write-Progress -Activity 'Creating WSUS SSL CI' -Status "$Component SSL CI: [Desired State: $ExpectedValue]" -PercentComplete $((($EnumValues.IndexOf($Component) + 1) / $EnumValues.Count) * 100) -CurrentOperation 'CI Creation' -Id 1
-        $FullScriptBlockDetection = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockGetILWSUSSLState, [string]::Format('(Get-ILWSUSSLState -WSUSComponent {0}).{0}', $Component)))
+        $FullScriptBlockDetection = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockGetILWSUSSLState, [string]::Format('(Get-ILWSUSSLComponentState -WSUSComponent {0}).{0}', $Component)))
         $FullScriptBlockRemediate = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockSetILWWebConfigurationSSL, $scriptblockResolveILWDesiredSSLState, [string]::Format('Set-ILWWebConfigurationSSL -WSUSComponent {0} -SSLState {1}', $Component, $SSLState)))
 
         $newCMConfigurationItemSplat = @{
@@ -83,7 +83,7 @@ function Import-ILWSUSSLConfigurationBaseline {
     $ConfigureSSLCI = New-CMConfigurationItem @newCMConfigurationItemSplat
     $FullScriptBlockDetection = [string]::Join([System.Environment]::NewLine, @($scriptblockTestILWSUSIsSSL, 'Test-ILWSUSIsSSL'))
     $FullScriptBlockRemediate = [string]::Join([System.Environment]::NewLine, @($scriptblockInvokeILWSUSConfigSSL, 'Invoke-ILWSUSConfigSSL'))
-    $FullScriptBlockDiscovery = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockGetILWSUSSLState, $scriptblockResolveILWDesiredSSLState, $scriptblockTestILWSUSSLState, [string]::Format('Test-ILWSUSSLState -SSLState {0}', $SSLState)))
+    $FullScriptBlockDiscovery = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockGetILWSUSSLState, $scriptblockResolveILWDesiredSSLState, $scriptblockTestILWSUSSLState, [string]::Format('Test-ILWSUSSLComponentState -SSLState {0}', $SSLState)))
 
     $addCMComplianceSettingScriptSplat = @{
         DataType                  = 'Boolean'

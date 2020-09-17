@@ -1,4 +1,4 @@
-function Get-ILWSUSSLState {
+function Get-ILWSUSSLComponentState {
     param(
         [Parameter(Mandatory = $false)]
         [WSUSComponent[]]$WSUSComponent
