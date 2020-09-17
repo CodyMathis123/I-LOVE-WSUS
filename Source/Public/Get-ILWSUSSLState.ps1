@@ -30,7 +30,7 @@ function Get-ILWSUSSLState {
                 ConfigurationAttribute {
                     $WSUSSLState.Add($Component, $(switch ($sslFlags.Value) {
                                 0 {
-                                    'Disabled'
+                                    'None'
                                 }
                                 default {
                                     'Unknown'
@@ -40,7 +40,7 @@ function Get-ILWSUSSLState {
             }
         }
         catch {
-            $WSUSSLState.Add($Component, 'Disabled')
+            $WSUSSLState.Add($Component, 'None')
         }
     }
     
