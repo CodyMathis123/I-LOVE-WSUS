@@ -41,7 +41,7 @@ function Import-ILWSUSSLConfigurationBaseline {
         $FullScriptBlockRemediate = [string]::Join([System.Environment]::NewLine, @($EnumAsString, $scriptblockSetILWWebConfigurationSSL, $scriptblockResolveILWDesiredSSLState, [string]::Format('Set-ILWWebConfigurationSSL -WSUSComponent {0} -SSLState {1}', $Component, $SSLState)))
 
         $newCMConfigurationItemSplat = @{
-            Name         = [string]::Format('WSUS - {0} SSL seto to {1}', $Component, $ExpectedValue)
+            Name         = [string]::Format('WSUS - {0} SSL set to {1}', $Component, $ExpectedValue)
             Description  = [string]::Format('PowerShell scripts that ensure the {0} component of WSUS is properly configured for SSL', $Component)
             CreationType = 'WindowsApplication'
         }
