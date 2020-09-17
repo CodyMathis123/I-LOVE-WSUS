@@ -2,9 +2,96 @@
 <helpItems schema="maml" xmlns="http://msh">
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Get-ILWSUSPortNumbers</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>ILWSUSPortNumbers</command:noun>
+      <maml:description>
+        <maml:para>Return the port numbers in use by WSUS, and the SSL state</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>This function will automatically determine the ports in use by WSUS, and return them as a PSCustomObject.</maml:para>
+      <maml:para>If WSUS is set to use any custom port other than 80/443 it      automatically determines the HTTP as noted in the link below     https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#configure-ssl-on-the-wsus-server         ... if you use any port other than 443 for HTTPS traffic,          WSUS will send clear HTTP traffic over the port that numerically          comes before the port for HTTPS. For example, if you use port 8531 for HTTPS,          WSUS will use port 8530 for HTTP.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-ILWSUSPortNumbers</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>WSUSServer</maml:name>
+          <maml:Description>
+            <maml:para>The WSUSServer object you want to gather port info. This is typically gathered with Get-WSUSServer,  but it defaults to the local server the function is run on.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>WSUSServer</maml:name>
+        <maml:Description>
+          <maml:para>The WSUSServer object you want to gather port info. This is typically gathered with Get-WSUSServer,  but it defaults to the local server the function is run on.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>[Microsoft.UpdateServices.Internal.BaseApi.UpdateServer]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>[PSCustomeObject]</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-ILWSUSPortNumbers</dev:code>
+        <dev:remarks>
+          <maml:para>Return the WSUS port info for the local WSUSServer</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-ILWSUSPortNumbers -WSUSServer (Get-WSUSServer -Name WSUS1.CONTOSO.LOCAL)</dev:code>
+        <dev:remarks>
+          <maml:para>Return the WSUS port info for the WSUS1.CONTOSO.LOCAL WSUS Server</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Get-ILWSUSSLComponentState</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>ILWSUSSLState</command:noun>
+      <command:noun>ILWSUSSLComponentState</command:noun>
       <maml:description>
         <maml:para>Returns the SSL configuration for the specified WSUSComponent</maml:para>
       </maml:description>
@@ -189,9 +276,63 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
+      <command:name>Invoke-ILWSUSConfigSSL</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>ILWSUSConfigSSL</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-ILWSUSConfigSSL</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
       <command:name>Set-ILWSUSSLComponentState</command:name>
       <command:verb>Set</command:verb>
-      <command:noun>ILWSUSSLState</command:noun>
+      <command:noun>ILWSUSSLComponentState</command:noun>
       <maml:description>
         <maml:para>Configures all WSUSComponent to the desired SSLState</maml:para>
       </maml:description>
@@ -399,6 +540,178 @@
         <dev:code>PS C:\&gt; Set-ILWWebConfigurationSSL -WSUSComponent ApiRemoting30,Content -SSLState Enabled</dev:code>
         <dev:remarks>
           <maml:para>Configures the ApiRemoting30 and Content WSUSComponent in IIS to be compatible with an SSL WSUS server.  Because the Content virtual directory should always use HTTP the function will not allow it to be configured to SSL, but will ensure it is configured properly for HTTP instead.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Test-ILWSUSIsSSL</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>ILWSUSIsSSL</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-ILWSUSIsSSL</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Test-ILWSUSSLComponentState</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>ILWSUSSLComponentState</command:noun>
+      <maml:description>
+        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>{{ Fill in the Description }}</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-ILWSUSSLComponentState</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+          <maml:name>WSUSComponent</maml:name>
+          <maml:Description>
+            <maml:para>{{ Fill WSUSComponent Description }}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">ApiRemoting30</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ClientWebService</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Content</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">DssAuthWebService</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Inventory</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ReportingWebService</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">SelfUpdate</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">ServerSyncWebService</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">SimpleAuthWebService</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">WSUSComponent[]</command:parameterValue>
+          <dev:type>
+            <maml:name>WSUSComponent[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>SSLState</maml:name>
+          <maml:Description>
+            <maml:para>{{ Fill SSLState Description }}</maml:para>
+          </maml:Description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" command:variableLength="false">Enabled</command:parameterValue>
+            <command:parameterValue required="false" command:variableLength="false">Disabled</command:parameterValue>
+          </command:parameterValueGroup>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>SSLState</maml:name>
+        <maml:Description>
+          <maml:para>{{ Fill SSLState Description }}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <maml:name>WSUSComponent</maml:name>
+        <maml:Description>
+          <maml:para>{{ Fill WSUSComponent Description }}</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">WSUSComponent[]</command:parameterValue>
+        <dev:type>
+          <maml:name>WSUSComponent[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:remarks>
+          <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

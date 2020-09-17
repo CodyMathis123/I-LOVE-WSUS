@@ -5,47 +5,33 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-ILWSUSSLComponentState
+# Test-ILWSUSSLComponentState
 
 ## SYNOPSIS
-
-Configures all WSUSComponent to the desired SSLState
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Set-ILWSUSSLComponentState [-SSLState] <String> [<CommonParameters>]
+Test-ILWSUSSLComponentState [[-WSUSComponent] <WSUSComponent[]>] [-SSLState] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-
-This function is used to properly configure the IIS WSUSComponents to the desired SSLState, either Enabled or Disabled.
-
-It will automatically account for WSUSComponents such as Content for example, which should never be SSL.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
 ### Example 1
-
-```ps
-PS C:\> Set-ILWSUSSLComponentState -SSLState Enabled
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-Configures all WSUSComponent in IIS to be compatible with an SSL WSUS server.
-
-### Example 2
-
-```ps
-PS C:\> Set-ILWSUSSLComponentState -SSLState Disabled
-```
-
-Configures all WSUSComponent in IIS to be compatible with a non-SSL WSUS server.
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -SSLState
-
-The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.
+{{ Fill SSLState Description }}
 
 ```yaml
 Type: String
@@ -54,6 +40,22 @@ Aliases:
 Accepted values: Enabled, Disabled
 
 Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WSUSComponent
+{{ Fill WSUSComponent Description }}
+
+```yaml
+Type: WSUSComponent[]
+Parameter Sets: (All)
+Aliases:
+Accepted values: ApiRemoting30, ClientWebService, Content, DssAuthWebService, Inventory, ReportingWebService, SelfUpdate, ServerSyncWebService, SimpleAuthWebService
+
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
@@ -69,8 +71,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### None
-
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
