@@ -2,7 +2,7 @@ function Get-ILWSUSPortNumbers {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-        [Microsoft.UpdateServices.Internal.BaseApi.UpdateServer]$WSUSServer = (Get-WSUSServer)
+        [object]$WSUSServer = (Get-WSUSServer)
     )
     #region Determine WSUS Port Numbers
     $WSUS_Port1 = $WSUSServer.PortNumber
