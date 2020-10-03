@@ -32,6 +32,8 @@ function Import-ILWSUSSLConfigurationBaseline {
     $scriptblockTestILWSUSIsSSL = Convert-FunctionToString -FunctionToConvert Test-ILWSUSIsSSL
     $scriptblockInvokeILWSUSConfigSSL = Convert-FunctionToString -FunctionToConvert Invoke-ILWSUSConfigSSL
     $scriptblockTestILWSUSSLState  = Convert-FunctionToString -FunctionToConvert Test-ILWSUSSLComponentState
+    $scriptBlockSetILWCertificateBinding = Convert-FunctionToString -FunctionToConvert Set-ILWCertificateBinding
+        # TODO - Need to add the IIS Certificate Binding function to the import
     $Baseline = New-CMBaseline -Name "WSUS SSL $SSLState" -Description "CB to ensure the WSUS IIS Components are correctly configured to set SSL to $SSLState"
 
     foreach ($Component in $EnumValues) {
@@ -119,5 +121,4 @@ function Import-ILWSUSSLConfigurationBaseline {
 
     Write-Output "Go check your MEMCM Console :)"
 
-    # TODO - Need to add the IIS Certificate Binding function to the import
 }
