@@ -16,7 +16,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-ILWSUSPortNumbers</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
           <maml:name>WSUSServer</maml:name>
           <maml:Description>
             <maml:para>The WSUSServer object you want to gather port info. This is typically gathered with Get-WSUSServer,  but it defaults to the local server the function is run on.</maml:para>
@@ -31,7 +31,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
         <maml:name>WSUSServer</maml:name>
         <maml:Description>
           <maml:para>The WSUSServer object you want to gather port info. This is typically gathered with Get-WSUSServer,  but it defaults to the local server the function is run on.</maml:para>
