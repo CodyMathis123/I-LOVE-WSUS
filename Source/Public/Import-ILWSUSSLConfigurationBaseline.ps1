@@ -118,4 +118,6 @@ function Import-ILWSUSSLConfigurationBaseline {
     Write-Progress -Activity 'Creating WSUS SSL CI' -Completed -CurrentOperation 'CI Creation' -Id 1
 
     Write-Output "Go check your MEMCM Console :)"
+
+    # TODO - Need to add the IIS Certificate Binding function to the import
 }
