@@ -5,29 +5,36 @@ function Get-ILWSUSPortNumbers {
         [object]$WSUSServer = (Get-WSUSServer)
     )
     #region Determine WSUS Port Numbers
-    $WSUS_Port1 = $WSUSServer.PortNumber
     $WSUS_IsSSL = $WSUSServer.UseSecureConnection
+    $ListeningPort = $WSUSServer.PortNumber
+    $WSUSPortInfo = [ordered]@{}
+    $WSUSPortInfo['WSUSIsSSL'] = $WSUS_IsSSL
 
     switch ($WSUS_IsSSL) {
         $true {
-            switch ($WSUS_Port1) {
+            $WSUSPortInfo['HttpPort'] = switch ($ListeningPort) {
                 443 {
-                    $WSUS_Port2 = 80
+                    80
                 }
                 default {
-                    $WSUS_Port2 = $WSUS_Port1 - 1
+                    $ListeningPort - 1
                 }
             }
+            $WSUSPortInfo['HttpsPort'] = $ListeningPort
         }
         $false {
-            $Wsus_Port2 = $null
+            $WSUSPortInfo['HttpPort'] = $ListeningPort
+            $WSUSPortInfo['HttpsPort'] = switch ($ListeningPort) {
+                80 {
+                    443
+                }
+                Default {
+                    $ListeningPort + 1
+                }
+            }
         }
     }
     #endregion Determine WSUS Port Numbers
 
-    return [PSCustomObject]@{
-        WSUSIsSSL = $WSUS_IsSSL
-        WSUSPort1 = $WSUS_Port1
-        WSUSPort2 = $WSUS_Port2
-    }
+    return $WSUSPortInfo
 }
