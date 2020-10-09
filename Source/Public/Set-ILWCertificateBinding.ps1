@@ -30,11 +30,11 @@ function Set-ILWCertificateBinding {
         return $Message
     }
 
-    $Binding = Get-WebBinding -Name $Website -Protocol https
+    $Binding = Get-ILWCertificateBinding -WebSite $WebSite
 
     if ($null -eq $Binding) {
         $null = New-WebBinding -Name $Website -Protocol https -Port $PortNumber
-        $Binding = Get-WebBinding -Name $Website -Protocol https
+        $Binding = Get-ILWCertificateBinding -WebSite $WebSite
     }
 
     switch ($Binding.CertificateHash -eq $ServerAuth.Thumbprint) {
