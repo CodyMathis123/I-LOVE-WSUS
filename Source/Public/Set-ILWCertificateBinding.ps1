@@ -18,7 +18,7 @@ function Set-ILWCertificateBinding {
     $WSUSPorts = Get-ILWSUSPortNumbers -WSUSServer $WSUS_Server
     $PortNumber = $WSUSPorts.HttpsPort
 
-    $ServerAuth = Get-ChildItem -Path Cert:\LocalMachine\My\  | Where-Object { $_.issuer -match $IssuingCA -and ($_.Subject -match $HostName -or $_.DnsNameList -match $HostName) -and $_.EnhancedKeyUsageList.FriendlyName -contains 'Server Authentication' } | Sort-Object -Property NotAfter | Select-Object -Last 1
+    $ServerAuth = Get-ChildItem -Path Cert:\LocalMachine\My\  | Where-Object { $_.issuer -match $IssuingCA -and ($_.Subject -match $HostName -or $_.DnsNameList.Where( { $_ -match $HostName } )) -and $_.EnhancedKeyUsageList.FriendlyName -contains 'Server Authentication' } | Sort-Object -Property NotAfter | Select-Object -Last 1
     if ($ServerAuth.NotAfter -le (Get-Date)) {
         $Message = "Unable to find a non-expired Server Authentication Certificate which matches [HostName: $Hostname] [Issuer: $IssuingCA]"
         Write-Error $Message

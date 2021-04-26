@@ -7,9 +7,9 @@ function Get-ILWCertificateBinding {
 
     if ($null -eq $Binding) {
         Write-Warning "No webbinding found for [Website: $Website]"
-        return [string]::Empty
+        return $null
     }
     else {
-        return $Binding.CertificateHash
+        return $Binding
     }
 }
