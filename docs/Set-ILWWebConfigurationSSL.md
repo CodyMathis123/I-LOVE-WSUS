@@ -13,7 +13,7 @@ Configures the specified WSUSComponent to the desired SSLState
 
 ## SYNTAX
 
-```
+```powershell
 Set-ILWWebConfigurationSSL [[-WSUSComponent] <WSUSComponent[]>] [-SSLState] <String> [<CommonParameters>]
 ```
 
@@ -39,7 +39,7 @@ Configures the ApiRemoting30 WSUSComponent in IIS to be compatible with a non-SS
 PS C:\> Set-ILWWebConfigurationSSL -WSUSComponent ApiRemoting30,Content -SSLState Enabled
 ```
 
-Configures the ApiRemoting30 and Content WSUSComponent in IIS to be compatible with an SSL WSUS server. 
+Configures the ApiRemoting30 and Content WSUSComponent in IIS to be compatible with an SSL WSUS server.
 Because the Content virtual directory should always use HTTP the function will not allow it to be configured to SSL,
 but will ensure it is configured properly for HTTP instead.
 
@@ -80,6 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
