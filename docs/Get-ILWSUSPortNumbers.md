@@ -55,7 +55,7 @@ The WSUSServer object you want to gather port info. This is typically gathered w
 but it defaults to the local server the function is run on.
 
 ```yaml
-Type: Object
+Type: System.Object
 Parameter Sets: (All)
 Aliases:
 

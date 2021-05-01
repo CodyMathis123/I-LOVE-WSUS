@@ -50,7 +50,7 @@ but will ensure it is configured properly for HTTP instead.
 The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Enabled, Disabled

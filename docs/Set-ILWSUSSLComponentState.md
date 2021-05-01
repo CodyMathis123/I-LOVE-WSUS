@@ -48,7 +48,7 @@ Configures all WSUSComponent in IIS to be compatible with a non-SSL WSUS server.
 The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Enabled, Disabled

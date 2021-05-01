@@ -47,7 +47,7 @@ Create Configuration Items, and a Configuration Baseline that will ensure a WSUS
 The desired state for SSL compatibility for the local WSUS server, either Enabled, or Disabled.
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Enabled, Disabled

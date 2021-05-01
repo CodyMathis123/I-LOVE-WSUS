@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Test-ILWSUSIsSSL
+# Get-ILWCertificateBinding
 
 ## SYNOPSIS
 
@@ -14,7 +14,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```powershell
-Test-ILWSUSIsSSL [<CommonParameters>]
+Get-ILWCertificateBinding [[-WebSite] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,6 +32,22 @@ PS C:\> {{ Add example code here }}
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -WebSite
+
+{{ Fill WebSite Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 

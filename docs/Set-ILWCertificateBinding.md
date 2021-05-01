@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Test-ILWSUSSLComponentState
+# Set-ILWCertificateBinding
 
 ## SYNOPSIS
 
@@ -14,7 +14,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```powershell
-Test-ILWSUSSLComponentState [[-WSUSComponent] <WSUSComponent[]>] [-SSLState] <String> [<CommonParameters>]
+Set-ILWCertificateBinding [-IssuingCA] <String> [[-WebSite] <String>] [[-HostName] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,35 +34,49 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -SSLState
+### -HostName
 
-{{ Fill SSLState Description }}
+{{ Fill HostName Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: Enabled, Disabled
 
-Required: True
-Position: 1
+Required: False
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -WSUSComponent
+### -IssuingCA
 
-{{ Fill WSUSComponent Description }}
+{{ Fill IssuingCA Description }}
 
 ```yaml
-Type: WSUSComponent[]
+Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: ApiRemoting30, ClientWebService, Content, DssAuthWebService, Inventory, ReportingWebService, SelfUpdate, ServerSyncWebService, SimpleAuthWebService
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WebSite
+
+{{ Fill WebSite Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
