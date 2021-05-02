@@ -14,8 +14,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```powershell
-Set-ILWCertificateBinding [-IssuingCA] <String> [[-WebSite] <String>] [[-HostName] <String>]
- [<CommonParameters>]
+Set-ILWCertificateBinding [-IssuingCA] <String> [[-WebSite] <String>] [[-HostName] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
