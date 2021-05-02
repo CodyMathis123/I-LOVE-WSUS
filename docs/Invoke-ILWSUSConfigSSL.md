@@ -31,7 +31,31 @@ PS C:\> Invoke-ILSWSUSConfigSSL -ServerCertificateName WSUS.CONTOSO.LOCAL
 
 Executes .\wsusutil.exe configuressl WSUS.CONTOSO.LOCAL
 
+### Example 2
+
+```powershell
+PS C:\> Invoke-ILSWSUSConfigSSL
+```
+
+Executes .\wsusutil.exe configuressl \<FQDN> where FQDN is gathered automatically for the local server.
+
 ## PARAMETERS
+
+### -SSLState
+
+The SSL State which the function should test for. This can be either Disabled, or Enabled.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
+Default value: [SYSTEM.NET.DNS]::GetHostByName($env:COMPUTERNAME).hostname
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 
@@ -43,7 +67,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### None
 
 ## NOTES
 
