@@ -9,27 +9,27 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Invokes the WsusUtil configuressl command with the specified ServerCertificateName.
 
 ## SYNTAX
 
 ```powershell
-Invoke-ILWSUSConfigSSL [<CommonParameters>]
+Invoke-ILWSUSConfigSSL [-ServerCertificateName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 
-{{ Fill in the Description }}
+This command is used to simplify calling the wsusutil.exe for configuressl.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Invoke-ILSWSUSConfigSSL -ServerCertificateName WSUS.CONTOSO.LOCAL
 ```
 
-{{ Add example description here }}
+Executes .\wsusutil.exe configuressl WSUS.CONTOSO.LOCAL
 
 ## PARAMETERS
 

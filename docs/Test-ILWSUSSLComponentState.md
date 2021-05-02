@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Return a boolean value indicating whether the specified components are configured for the requested SSLState.
 
 ## SYNTAX
 
@@ -19,23 +19,25 @@ Test-ILWSUSSLComponentState [[-WSUSComponent] <WSUSComponent[]>] [-SSLState] <St
 
 ## DESCRIPTION
 
-{{ Fill in the Description }}
+This function is used to test the SSLState of an array of WSUSComponent to ensure that the IIS configuration is correct based on Microsoft documentation. The IIS configuration which is appropriate is automatically determined. For example. the Content virtual directory should never be configured for SSL, so if you test with SSLState enabled against this component we will be testing that SSL is not configured for the Content virtual directory.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Test-ILWSUSSLComponentState -SSLState Enabled
+
+$true
 ```
 
-{{ Add example description here }}
+The bool return of $true means that all WSUS Components are correctly configured to have SSL enabled.
 
 ## PARAMETERS
 
 ### -SSLState
 
-{{ Fill SSLState Description }}
+The SSL State which the function should test for. This can be either Disabled, or Enabled.
 
 ```yaml
 Type: System.String
@@ -52,7 +54,7 @@ Accept wildcard characters: False
 
 ### -WSUSComponent
 
-{{ Fill WSUSComponent Description }}
+The WSUS Component which the function should test against. This is populated by an enum and will default to all components.
 
 ```yaml
 Type: WSUSComponent[]
@@ -62,7 +64,7 @@ Accepted values: ApiRemoting30, ClientWebService, Content, DssAuthWebService, In
 
 Required: False
 Position: 0
-Default value: None
+Default value: [System.Enum]::GetValues('WSUSComponent')
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -73,11 +75,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### WSUSComponent
 
 ## OUTPUTS
 
-### System.Object
+### System.Boolean
 
 ## NOTES
 

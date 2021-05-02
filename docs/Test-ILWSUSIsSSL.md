@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Return a boolean value indicating whether WSUS is currently configured for SSL.
 
 ## SYNTAX
 
@@ -19,17 +19,29 @@ Test-ILWSUSIsSSL [<CommonParameters>]
 
 ## DESCRIPTION
 
-{{ Fill in the Description }}
+This function is used to test whether WSUS is currently configured for SSL. This test is done by using the UsingSSL registry property in the WSUS Server\Setup key.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Test-ILWSUSIsSSL
+
+$false
 ```
 
-{{ Add example description here }}
+The current WSUS server is not in SSL mode.
+
+### Example 2
+
+```powershell
+PS C:\> Test-ILWSUSIsSSL
+
+$true
+```
+
+The current WSUS server is currently in SSL mode.
 
 ## PARAMETERS
 
@@ -43,7 +55,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### System.Boolean
 
 ## NOTES
 

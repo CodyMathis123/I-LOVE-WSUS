@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-{{ Fill in the Synopsis }}
+Return the IIS binding object if found for ths specified website, otherwise return $null.
 
 ## SYNTAX
 
@@ -19,23 +19,27 @@ Get-ILWCertificateBinding [[-WebSite] <String>] [<CommonParameters>]
 
 ## DESCRIPTION
 
-{{ Fill in the Description }}
+This function is used to return the IIS binding object for the specified website. It specifically searches for the HTTPS binding. If the respective binding is not found then $null will be returned instead.
 
 ## EXAMPLES
 
 ### Example 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\>  Get-ILWCertificateBinding -WebSite 'WSUS Administration'
+
+protocol bindingInformation sslFlags
+-------- ------------------ --------
+https    :8531:                    0
 ```
 
-{{ Add example description here }}
+The IIS binding for the WSUS Administration site is returned.
 
 ## PARAMETERS
 
 ### -WebSite
 
-{{ Fill WebSite Description }}
+The name of the IIS website which you want to get the binding for.
 
 ```yaml
 Type: String
@@ -59,8 +63,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### Microsoft.IIs.PowerShell.Framework.ConfigurationElement
 
 ## NOTES
+
+This will only return HTTPS bindings as we are getting this strictly for the purpose of binding a certificate.
 
 ## RELATED LINKS
